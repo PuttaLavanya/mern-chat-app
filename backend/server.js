@@ -8,8 +8,9 @@ import messageRoutes from "./routes/message.routes.js";
 import userRoutes from "./routes/users.routes.js";
 
 import connectToMongoDB from "./db/connectToMongoDB.js";
+import { app, server } from "./socket/socket.js";
 
-const app = express();
+
 dotenv.config();
 const port = 5000 || process.env.PORT;
 
@@ -21,14 +22,14 @@ app.use("/api/auth",authRoutes);
 app.use("/api/messages",messageRoutes);
 app.use("/api/users",userRoutes);
 
-app.get("/",(req,res)=>{
-    res.send("Om Namashivaya!!!");
+// app.get("/",(req,res)=>{
+//     res.send("Om Namashivaya!!!");
 
-})
+// })
 
 
 
-app.listen(port,()=>{
+server.listen(port,()=>{
     connectToMongoDB();
     console.log(`listening on port ${port}`);
 });
